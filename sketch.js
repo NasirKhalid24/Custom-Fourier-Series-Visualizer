@@ -5,14 +5,14 @@ let width = 600;
 let background_color = "#000000";
 let line_color = "#ffffff";
 let line_color_2 = "#646464";
-
+let terms;
 
 function setup(){
   // Creating the canvas
   width = 0.9 * windowWidth;
   let canvas = createCanvas(width, height);
   canvas.parent('sketch-holder')
-  
+
   // Color selector listeners
   document.querySelector("#canvas_background").addEventListener("change", (event) =>{
     background_color = event.target.value;
@@ -24,9 +24,13 @@ function setup(){
     line_color_2 = event.target.value;
   })
 
-
-  slider_terms = createSlider(1, 100, 2)
-  slider_terms.parent('terms');
+  //
+  slider_terms = createSlider(1, 60, 2)
+  slider_terms.parent('slider');
+  // slider_terms.size(100);
+  slider_terms.style(
+    'width', '100%',
+  )
 }
 
 function windowResized() {
@@ -41,7 +45,8 @@ function draw(){
   let x = 0;
   let y = 0;
   let radius = 0;
-  let n = 0;
+
+  document.querySelector(".number_of_terms").innerHTML = "Number of Terms: " + slider_terms.value();
 
   for(let j = 1; j <= slider_terms.value(); j++){
     let numerator = '2';
@@ -64,6 +69,8 @@ function draw(){
     ellipse(prev_x, prev_y, radius*2);
     stroke(line_color);
     line(prev_x, prev_y, x, y);
+
+    // Remove unnecessary points to maintain speed
     if (wave.length > width){
       wave.pop();
     }

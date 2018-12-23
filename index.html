@@ -25,6 +25,15 @@
       .color_box{
         padding: 1rem;
       }
+      .terms{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      .terms-slider{
+        width: 100%;
+      }
       label {
         font: 1.2rem 'Roboto', sans-serif;
       }
@@ -38,6 +47,7 @@
       <h1>Fourier Series Visualizer</h1>
       <div id="sketch-holder"></div>
       <div class="controls">
+
         <div class="color_options">
           <div class="color_box">
             <input type="color" name="background" id="canvas_background" value="#000000">
@@ -52,7 +62,14 @@
               <label for="small_circles">Circle</label>
           </div>
         </div>
-        <div id="terms"></div>
+
+        <div class="terms">
+          <p class="number_of_terms"></p>
+          <div class="terms-slider">
+            <div id="slider"></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </body>
