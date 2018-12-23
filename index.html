@@ -7,8 +7,54 @@
     <!-- <script src="./addons/CCapture.all.min.js"></script> -->
     <script src="./addons/p5.min.js"></script>
     <script src="./addons/p5.dom.min.js"></script>
-    <script src="sketch.js"></script>
+    <style>
+      .parent{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      .controls{
+        display: grid;
+      }
+      .color_options{
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+      }
+      .color_box{
+        padding: 1rem;
+      }
+      label {
+        font: 1.2rem 'Roboto', sans-serif;
+      }
+      h1{
+        font-family: 'Roboto', sans-serif;
+      }
+    </style>
   </head>
   <body>
+    <div class="parent">
+      <h1>Fourier Series Visualizer</h1>
+      <div id="sketch-holder"></div>
+      <div class="controls">
+        <div class="color_options">
+          <div class="color_box">
+            <input type="color" name="background" id="canvas_background" value="#000000">
+            <label for="background">Background</label>
+          </div>
+          <div class="color_box">
+            <input type="color" name="lines" id="canvas_lines" value="#ffffff">
+            <label for="lines">Line</label>
+          </div>
+          <div class="color_box">
+              <input type="color" name="small_circles" id="canvas_circles"  value="#646464">
+              <label for="small_circles">Circle</label>
+          </div>
+        </div>
+        <div id="terms"></div>
+      </div>
+    </div>
   </body>
+  <script src="sketch.js"></script>
 </html>

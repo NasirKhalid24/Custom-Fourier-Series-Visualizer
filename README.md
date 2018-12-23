@@ -1,4 +1,4 @@
-#Fourier Series Visualizer
+# Fourier Series Visualizer
 
 A tool to help visualize any Fourier series. Each term of the series is represented using circles.
 

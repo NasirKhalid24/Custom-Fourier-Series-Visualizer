@@ -1,21 +1,41 @@
 let time = 0;
 let wave = [];
-
-const width = 600;
-const height = 400;
+let height = 400;
+let width = 600;
+let background_color = "#000000";
+let line_color = "#ffffff";
+let line_color_2 = "#646464";
 
 
 function setup(){
-  createCanvas(width, height);
-  slider = createSlider(1, 100, 2)
-  slider.position(0, height)
+  // Creating the canvas
+  width = 0.9 * windowWidth;
+  let canvas = createCanvas(width, height);
+  canvas.parent('sketch-holder')
+  
+  // Color selector listeners
+  document.querySelector("#canvas_background").addEventListener("change", (event) =>{
+    background_color = event.target.value;
+  })
+  document.querySelector("#canvas_lines").addEventListener("change", (event) =>{
+    line_color = event.target.value;
+  })
+  document.querySelector("#canvas_circles").addEventListener("change", (event) =>{
+    line_color_2 = event.target.value;
+  })
+
+
+  slider_terms = createSlider(1, 100, 2)
+  slider_terms.parent('terms');
+}
+
+function windowResized() {
+  width = 0.9 * windowWidth;
+  resizeCanvas(width, height);
 }
 
 function draw(){
-  background(0);
-  textSize(20);
-  fill(255);
-  text('Iterations', 0 , height);
+  background(background_color);
   translate(width/5, height/2);
   
   let x = 0;
@@ -23,7 +43,7 @@ function draw(){
   let radius = 0;
   let n = 0;
 
-  for(let j = 1; j <= slider.value(); j++){
+  for(let j = 1; j <= slider_terms.value(); j++){
     let numerator = '2';
     let denomenator = 'PI * j';
     let coefficient = 'j';
@@ -39,10 +59,10 @@ function draw(){
     radius = map(radius, 0, initial_radius, 0, 100)
     x += radius * cos(coefficient * time);
     y += radius * sin(coefficient * time);
-    stroke(100);
+    stroke(line_color_2);
     noFill();
     ellipse(prev_x, prev_y, radius*2);
-    stroke(255);
+    stroke(line_color);
     line(prev_x, prev_y, x, y);
     if (wave.length > width){
       wave.pop();
