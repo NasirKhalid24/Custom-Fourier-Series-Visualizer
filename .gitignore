@@ -1,0 +1,7 @@
+# Remove Gif Maker
+/addons/CCapture.all.min.js
+
+# Not using sound scripts
+/addons/p5.sound.js
+/addons/p5.sound.min.js
+/addons/p5.dom.js
