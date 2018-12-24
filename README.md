@@ -8,5 +8,6 @@ _Built using P5.js and based on Daniel Shiffmans Fourier Series Coding Challenge
 
 - ~~Custom Colours~~
 - ~~Sliding bar for number of terms~~
-- Text box for numerator, denomenator & coefficients
+- ~~Text box for numerator, denomenator & coefficients~~
+- Add validation for custom equations
 - Make it mobile friendly
