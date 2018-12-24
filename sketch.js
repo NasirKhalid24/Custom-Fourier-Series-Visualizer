@@ -6,6 +6,8 @@ let background_color = "#000000";
 let line_color = "#ffffff";
 let line_color_2 = "#646464";
 let terms;
+let initial_term = 0;
+let equation = ["4", "PI * ((2*n) + 1)", "((2*n) + 1)"];
 
 function setup(){
   // Creating the canvas
@@ -13,29 +15,66 @@ function setup(){
   let canvas = createCanvas(width, height);
   canvas.parent('sketch-holder')
 
+  //Set width of controls
+  document.querySelector('.controls').style.width = width + "px";
+
   // Color selector listeners
-  document.querySelector("#canvas_background").addEventListener("change", (event) =>{
+  document.getElementById("canvas_background").addEventListener("change", (event) =>{
     background_color = event.target.value;
   })
-  document.querySelector("#canvas_lines").addEventListener("change", (event) =>{
+  document.getElementById("canvas_lines").addEventListener("change", (event) =>{
     line_color = event.target.value;
   })
-  document.querySelector("#canvas_circles").addEventListener("change", (event) =>{
+  document.getElementById("canvas_circles").addEventListener("change", (event) =>{
     line_color_2 = event.target.value;
   })
 
-  //
+  //Slider for Number of Terms
   slider_terms = createSlider(1, 60, 2)
   slider_terms.parent('slider');
-  // slider_terms.size(100);
   slider_terms.style(
     'width', '100%',
   )
+
+  //Custom Equation Commands
+  document.getElementById("submit").onclick = UpdateCanvasEquation;
 }
 
+function UpdateEquation(event){
+  switch(event.target.id){
+    case "numerator":
+      equation[0] = event.target.value;
+      break;
+    case "denomenator":
+      equation[1] = event.target.value;
+      break;
+    case "coefficient":
+      equation[2] = event.target.value;
+      break;
+    case "series_1":
+      if(event.target.checked){
+        initial_term = 1;
+      }else{
+        initial_term = 0;
+      }
+      break;
+  }
+}
+
+function UpdateCanvasEquation(){
+  equation[0] = document.getElementById("numerator").value;
+  equation[1] = document.getElementById("denomenator").value;
+  equation[2] = document.getElementById("coefficient").value;
+  initial_term = (document.getElementById("series_1").checked) ? 1 : 0;
+  wave = []
+}
 function windowResized() {
+  //Canvas width
   width = 0.9 * windowWidth;
   resizeCanvas(width, height);
+
+  //Set width of controls
+  document.querySelector('.controls').style.width = width + "px";
 }
 
 function draw(){
@@ -47,18 +86,14 @@ function draw(){
   let radius = 0;
 
   document.querySelector(".number_of_terms").innerHTML = "Number of Terms: " + slider_terms.value();
-
-  for(let j = 1; j <= slider_terms.value(); j++){
-    let numerator = '2';
-    let denomenator = 'PI * j';
-    let coefficient = 'j';
+  for(var n = initial_term; n <= slider_terms.value(); n++){
+    let numerator = eval(equation[0]);
+    let denomenator = eval(equation[1]);
+    let coefficient = eval(equation[2]);
     let prev_x = x;
     let prev_y = y;
-    numerator = eval(numerator);
-    denomenator = eval(denomenator);
-    coefficient = eval(coefficient);
     radius = numerator/denomenator;
-    if(j==1){
+    if(n==initial_term){
       initial_radius = radius
     }
     radius = map(radius, 0, initial_radius, 0, 100)

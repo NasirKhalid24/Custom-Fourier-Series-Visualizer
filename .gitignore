@@ -5,3 +5,6 @@
 /addons/p5.sound.js
 /addons/p5.sound.min.js
 /addons/p5.dom.js
+
+#Remove commit tracker
+commit_tracker.txt
