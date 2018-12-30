@@ -2,7 +2,9 @@
 
 A tool to help visualize any Fourier series. Each term of the series is represented using circles. 
 
-![GIF of Webapp in action](/addons/readme.gif)
+<div align="center">
+    <img  src="./addons/readme.gif" alt="GIF of Webapp in action">
+</div>
 
 Try it out [here](https://nasirkhalid24.github.io/Custom-Fourier-Series-Visualizer/)!
 

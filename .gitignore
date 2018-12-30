@@ -8,6 +8,3 @@
 
 #Remove commit tracker
 commit_tracker.txt
-
-#Remove VSCODE folder
-.vscode
