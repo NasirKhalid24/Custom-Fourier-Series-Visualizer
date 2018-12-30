@@ -1,13 +1,13 @@
 # Fourier Series Visualizer
 
-A tool to help visualize any Fourier series. Each term of the series is represented using circles. Try it out [here](https://nasirkhalid24.github.io/Custom-Fourier-Series-Visualizer/)!
+A tool to help visualize any Fourier series. Each term of the series is represented using circles. 
 
-_Built using P5.js and based on Daniel Shiffmans Fourier Series Coding Challenge_
+![GIF of Webapp in action](/addons/readme.gif)
 
-## Features to Add
+Try it out [here](https://nasirkhalid24.github.io/Custom-Fourier-Series-Visualizer/)!
 
-- ~~Custom Colours~~
-- ~~Sliding bar for number of terms~~
-- ~~Text box for numerator, denomenator & coefficients~~
-- Add validation for custom equations
-- Make it mobile friendly
+### Custom Equation Guide:
+
+- Terms in the series are denoted by the letter '**n**'
+- To use only odd terms you may use '**(2*n)+1**' with the initial term box unchecked
+- Similarly to use only even terms you may use '**(2*n)**' with the initial term box unchecked.

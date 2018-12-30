@@ -2,12 +2,19 @@ let time = 0;
 let wave = [];
 let height = 400;
 let width = 600;
-let background_color = "#000000";
-let line_color = "#ffffff";
-let line_color_2 = "#646464";
+let background_color = document.getElementById("canvas_background").value;
+let line_color = document.getElementById("canvas_lines").value;
+let line_color_2 = document.getElementById("canvas_circles").value;
 let terms;
 let initial_term = 0;
-let equation = ["4", "PI * ((2*n) + 1)", "((2*n) + 1)"];
+let maximum_terms = 70;
+let presets = {
+  "square": ["4", "PI * ((2*n) + 1)", "(2*n) + 1", false],
+  "sawtooth": ["2", "pow(-1, n) * n * PI", "n", true],
+  "triangle": ["8 * pow(-1, (((2*n)+1)-1)/2)", "PI * PI * ((2*n)+1) * ((2*n)+1)", "((2*n)+1)", false],
+  "clausen": ["1", "n*n", "n", true]
+};
+let equation = ["4", "PI * ((2*n) + 1)", "(2*n) + 1"];
 
 function setup(){
   // Creating the canvas
@@ -30,34 +37,30 @@ function setup(){
   })
 
   //Slider for Number of Terms
-  slider_terms = createSlider(1, 60, 2)
+  slider_terms = createSlider(1, maximum_terms, 2)
   slider_terms.parent('slider');
   slider_terms.style(
     'width', '100%',
   )
 
   //Custom Equation Commands
-  document.getElementById("submit").onclick = UpdateCanvasEquation;
+  document.getElementById("submit").onclick = () => {
+    document.getElementById("presets").value = "custom";
+    UpdateCanvasEquation();
+  }
+  document.getElementById("presets").onchange = UpdateDisplayEquation;
+  
 }
 
-function UpdateEquation(event){
-  switch(event.target.id){
-    case "numerator":
-      equation[0] = event.target.value;
-      break;
-    case "denomenator":
-      equation[1] = event.target.value;
-      break;
-    case "coefficient":
-      equation[2] = event.target.value;
-      break;
-    case "series_1":
-      if(event.target.checked){
-        initial_term = 1;
-      }else{
-        initial_term = 0;
-      }
-      break;
+function UpdateDisplayEquation(event){
+  for (const key in presets) {
+    if (key === event.target.value) {
+      document.getElementById("numerator").value = presets[event.target.value][0];
+      document.getElementById("denomenator").value = presets[event.target.value][1];
+      document.getElementById("coefficient").value = presets[event.target.value][2];
+      document.getElementById("series_1").checked = presets[event.target.value][3];
+      UpdateCanvasEquation();
+    }
   }
 }
 
@@ -68,6 +71,7 @@ function UpdateCanvasEquation(){
   initial_term = (document.getElementById("series_1").checked) ? 1 : 0;
   wave = []
 }
+
 function windowResized() {
   //Canvas width
   width = 0.9 * windowWidth;
@@ -123,5 +127,5 @@ function draw(){
   }
   endShape();
 
-  time += 0.08;
+  time += 0.06;
 }
